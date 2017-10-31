@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchTableHeaderView" customModule="Wavelength" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="52"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sFD-JI-fca">
+                    <rect key="frame" x="16" y="12" width="356" height="29"/>
+                    <segments>
+                        <segment title="Apple Music"/>
+                        <segment title="Your Library"/>
+                    </segments>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="sFD-JI-fca" secondAttribute="bottom" constant="12" id="HuR-4k-59Y"/>
+                <constraint firstItem="sFD-JI-fca" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="12" id="Ubj-GX-Vlw"/>
+                <constraint firstItem="sFD-JI-fca" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="lkh-dy-Sdv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="sFD-JI-fca" secondAttribute="trailing" constant="16" id="yLd-nt-3cR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="segmentedControl" destination="sFD-JI-fca" id="NkJ-Et-d6N"/>
+            </connections>
+            <point key="canvasLocation" x="31" y="-255"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="115" id="KGk-i7-Jjw" customClass="SongTableViewCell" customModule="Wavelength" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="467" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="467" height="114.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ffg-yP-Bpn">
+                        <rect key="frame" x="16" y="8" width="99" height="99"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joi" translatesAutoresizingMaskIntoConstraints="NO" id="fEQ-rj-65b">
+                                <rect key="frame" x="0.0" y="0.0" width="99" height="99"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fEQ-rj-65b" firstAttribute="top" secondItem="Ffg-yP-Bpn" secondAttribute="top" id="8Ue-o3-hQE"/>
+                            <constraint firstAttribute="bottom" secondItem="fEQ-rj-65b" secondAttribute="bottom" id="9Em-I2-xPO"/>
+                            <constraint firstItem="fEQ-rj-65b" firstAttribute="leading" secondItem="Ffg-yP-Bpn" secondAttribute="leading" id="Nt5-h7-7Fo"/>
+                            <constraint firstAttribute="width" secondItem="Ffg-yP-Bpn" secondAttribute="height" multiplier="1:1" id="XKD-Dk-CkM"/>
+                            <constraint firstAttribute="trailing" secondItem="fEQ-rj-65b" secondAttribute="trailing" id="rUp-NM-7gZ"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Too Good at Goodbyes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKa-l3-EsJ">
+                        <rect key="frame" x="123" y="8" width="336" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sam Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8s-S6-xSs">
+                        <rect key="frame" x="123" y="29.5" width="336" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ffg-yP-Bpn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3Y8-CC-VZu"/>
+                    <constraint firstItem="NKa-l3-EsJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="HIn-Gs-lLc"/>
+                    <constraint firstItem="I8s-S6-xSs" firstAttribute="top" secondItem="NKa-l3-EsJ" secondAttribute="bottom" constant="2" id="HVN-gD-oqW"/>
+                    <constraint firstItem="NKa-l3-EsJ" firstAttribute="leading" secondItem="Ffg-yP-Bpn" secondAttribute="trailing" constant="8" id="UAg-i1-sXB"/>
+                    <constraint firstItem="I8s-S6-xSs" firstAttribute="leading" secondItem="Ffg-yP-Bpn" secondAttribute="trailing" constant="8" id="Zhc-1i-UdS"/>
+                    <constraint firstAttribute="trailing" secondItem="NKa-l3-EsJ" secondAttribute="trailing" constant="8" id="def-H8-rH1"/>
+                    <constraint firstAttribute="trailing" secondItem="I8s-S6-xSs" secondAttribute="trailing" constant="8" id="mRk-fi-61N"/>
+                    <constraint firstItem="Ffg-yP-Bpn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="uMk-2b-yBU"/>
+                    <constraint firstAttribute="bottom" secondItem="Ffg-yP-Bpn" secondAttribute="bottom" constant="8" id="vwe-4I-oEG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="artistLabel" destination="I8s-S6-xSs" id="59O-zG-dHC"/>
+                <outlet property="artworkImageView" destination="fEQ-rj-65b" id="xHp-h0-Nu5"/>
+                <outlet property="imageContainerView" destination="Ffg-yP-Bpn" id="vQr-9n-hud"/>
+                <outlet property="songTitleLabel" destination="NKa-l3-EsJ" id="HAh-Zr-2rI"/>
+            </connections>
+            <point key="canvasLocation" x="105.5" y="95.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="joi" width="642" height="642"/>
+    </resources>
+</document>

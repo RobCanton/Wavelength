@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ThemeEntity" representedClassName="ThemeEntity" syncable="YES">
+        <attribute name="backgroundColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="buttonBackgroundColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="buttonColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="darkKeyboard" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="darkStatusBar" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="detailPrimaryColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="detailSecondaryColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="musicBarBackgroundColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="musicBarBlurIntensity" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="musicBarButtonColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="musicBarColorAlpha" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitleColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="titleColor" optional="YES" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="UserConfig" representedClassName="UserConfig" syncable="YES">
+        <attribute name="currenttheme" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ThemeEntity" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="UserConfig" positionX="-54" positionY="72" width="128" height="60"/>
+    </elements>
+</model>

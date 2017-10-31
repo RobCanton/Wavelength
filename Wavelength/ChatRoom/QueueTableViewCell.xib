@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="66" id="KGk-i7-Jjw" customClass="QueueTableViewCell" customModule="Wavelength" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="427" height="66"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="427" height="65.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joi" translatesAutoresizingMaskIntoConstraints="NO" id="rnd-uF-dxc">
+                        <rect key="frame" x="20" y="4" width="57.5" height="57.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="rnd-uF-dxc" secondAttribute="height" multiplier="1:1" id="pWu-UU-lHm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Everything is Violence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MV-45-0ut">
+                        <rect key="frame" x="94" y="10" width="321" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seu-Pt-io8">
+                        <rect key="frame" x="93.5" y="32.5" width="321.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfr-se-zVj">
+                        <rect key="frame" x="94" y="65.5" width="393" height="0.5"/>
+                        <color key="backgroundColor" white="0.66805288461538459" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="keo-MP-cFg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.94695913470000004" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="rnd-uF-dxc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9I3-Ov-vv6"/>
+                    <constraint firstItem="1MV-45-0ut" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="AXa-is-5LQ"/>
+                    <constraint firstItem="kfr-se-zVj" firstAttribute="leading" secondItem="rnd-uF-dxc" secondAttribute="trailing" constant="16" id="CJP-Ec-h3r"/>
+                    <constraint firstAttribute="trailing" secondItem="kfr-se-zVj" secondAttribute="trailing" constant="-60" id="IPp-VG-fVn"/>
+                    <constraint firstItem="rnd-uF-dxc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Xx1-Dq-vqN"/>
+                    <constraint firstItem="1MV-45-0ut" firstAttribute="leading" secondItem="rnd-uF-dxc" secondAttribute="trailing" constant="16" id="ZEK-mf-ZNJ"/>
+                    <constraint firstAttribute="bottom" secondItem="kfr-se-zVj" secondAttribute="bottom" id="bf2-6p-zem"/>
+                    <constraint firstAttribute="bottom" secondItem="rnd-uF-dxc" secondAttribute="bottom" constant="4" id="cHC-Gh-Jka"/>
+                    <constraint firstItem="seu-Pt-io8" firstAttribute="top" secondItem="1MV-45-0ut" secondAttribute="bottom" constant="2" id="mPq-f0-8lL"/>
+                    <constraint firstItem="seu-Pt-io8" firstAttribute="leading" secondItem="rnd-uF-dxc" secondAttribute="trailing" constant="16" id="mmy-Hj-Vwt"/>
+                    <constraint firstAttribute="trailing" secondItem="seu-Pt-io8" secondAttribute="trailing" constant="12" id="pgk-YM-K9Y"/>
+                    <constraint firstAttribute="trailing" secondItem="1MV-45-0ut" secondAttribute="trailing" constant="12" id="ytZ-qT-rWd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="artworkImageView" destination="rnd-uF-dxc" id="Dwu-79-wkE"/>
+                <outlet property="subtitleLabel" destination="seu-Pt-io8" id="VLD-gJ-7iI"/>
+                <outlet property="titleLabel" destination="1MV-45-0ut" id="VYU-04-X9N"/>
+            </connections>
+            <point key="canvasLocation" x="78.5" y="63"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="joi" width="642" height="642"/>
+    </resources>
+</document>

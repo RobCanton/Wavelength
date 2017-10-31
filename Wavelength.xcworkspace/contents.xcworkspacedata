@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Wavelength/Customizer/UserConfig+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Wavelength/Customizer/UserConfig+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Wavelength/RecentlyPlayed/ThemeEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Wavelength/RecentlyPlayed/ThemeEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:Wavelength.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

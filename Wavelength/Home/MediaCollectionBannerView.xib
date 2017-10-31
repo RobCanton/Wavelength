@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MediaCollectionBannerView" customModule="Wavelength" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="244"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UxF-Os-xhC">
+                    <rect key="frame" x="0.0" y="0.0" width="399" height="194"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zij-RK-i7w">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayd-Aa-jzq">
+                    <rect key="frame" x="0.0" y="194" width="399" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular Now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXD-G4-9M4">
+                            <rect key="frame" x="16" y="18" width="367" height="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="WXD-G4-9M4" firstAttribute="leading" secondItem="ayd-Aa-jzq" secondAttribute="leading" constant="16" id="KSO-Si-oDm"/>
+                        <constraint firstAttribute="trailing" secondItem="WXD-G4-9M4" secondAttribute="trailing" constant="16" id="NxD-fF-WwZ"/>
+                        <constraint firstAttribute="height" constant="50" id="bUE-Da-PCw"/>
+                        <constraint firstAttribute="bottom" secondItem="WXD-G4-9M4" secondAttribute="bottom" constant="8" id="trO-q1-uuk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ayd-Aa-jzq" secondAttribute="bottom" id="9ay-1y-DpW"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ayd-Aa-jzq" secondAttribute="trailing" id="BEu-QQ-8E2"/>
+                <constraint firstItem="UxF-Os-xhC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DrF-3V-qBg"/>
+                <constraint firstItem="UxF-Os-xhC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="FgM-tI-XCg"/>
+                <constraint firstItem="ayd-Aa-jzq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="jXC-xk-FWp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="UxF-Os-xhC" secondAttribute="trailing" id="laA-hC-Pch"/>
+                <constraint firstItem="ayd-Aa-jzq" firstAttribute="top" secondItem="UxF-Os-xhC" secondAttribute="bottom" id="vBa-nS-6Eq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="collectionView" destination="UxF-Os-xhC" id="424-dX-Ior"/>
+            </connections>
+            <point key="canvasLocation" x="46.5" y="-155"/>
+        </view>
+    </objects>
+</document>
