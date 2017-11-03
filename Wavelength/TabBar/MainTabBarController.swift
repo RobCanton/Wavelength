@@ -40,6 +40,10 @@ class MainTabBarController: UITabBarController {
         playerBar.frame = CGRect(x: 0, y: view.bounds.height - tabBar.frame.height - 68.0, width: view.bounds.width, height: 68.0)
         playerBar.setupViews()
         playerBar.delegate = self
+        
+        playerBar.authorizationManager = authorizationManager
+        playerBar.appleMusicManager = appleMusicManager
+        
         view.insertSubview(playerBar, belowSubview: tabBar)
         setMusicBarHidden(true, animated: false)
         
@@ -54,6 +58,8 @@ class MainTabBarController: UITabBarController {
         guard let searchScreen = viewController(atIndex: 1) as? SearchViewController else {
             fatalError("homeScreen not found at index 0")
         }
+        
+        
         
         homeScreen.authorizationManager = authorizationManager
         homeScreen.appleMusicManager = appleMusicManager
@@ -173,6 +179,8 @@ class MainTabBarController: UITabBarController {
         guard let  nowPlayingItem = musicPlayerManager.musicPlayerController.nowPlayingItem else { return }
         let modal = ChatRoomViewController()
         modal.mediaItem = nowPlayingItem
+        modal.appleMusicManager = appleMusicManager
+        modal.authorizationManager = authorizationManager
         modal.musicPlayerManager = musicPlayerManager
         modal.transitioningDelegate = deckTransitionDelegate
         modal.modalPresentationStyle = .custom

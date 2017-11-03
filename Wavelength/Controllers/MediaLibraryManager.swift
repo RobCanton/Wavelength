@@ -182,6 +182,26 @@ class MediaLibraryManager: NSObject {
         return query.items
     }
     
+    func getArtists(completion:@escaping((_ artistsCollection:MPMediaItemCollection)->())) {
+        DispatchQueue.global(qos: .background).async {
+            let artistsQuery = MPMediaQuery.artists()
+            let collections:[MPMediaItemCollection] = artistsQuery.collections != nil ? artistsQuery.collections! : []
+            
+            var artists = [String]()
+            for artist in collections {
+                var artistName = ""
+                for item in artist.items {
+                    artistName = item.albumArtist != nil ? item.albumArtist! : ""
+                }
+                artists.append(artistName)
+            }
+        }
+        
+    }
+    
+    var artistsSorted = [Artist]()
+    var allSongs = [Song]()
+    
     func getMusicLibrary(completion:@escaping(_ albums:[AlbumInfo])->()) {
         DispatchQueue.global(qos: .background).async {
             
@@ -191,7 +211,8 @@ class MediaLibraryManager: NSObject {
 
 
             let albumItems: [MPMediaItemCollection] = albumsQuery.collections! as [MPMediaItemCollection]
-            
+            var artistsDict = [String:Artist]()
+            var tempSongs = [Song]()
             for album in albumItems {
                 
                 let albumItems: [MPMediaItem] = album.items as [MPMediaItem]
@@ -209,6 +230,7 @@ class MediaLibraryManager: NSObject {
                 var year:Int?
                 
                 for song in albumItems {
+                    
                     albumID = "\(song.value(forProperty: MPMediaItemPropertyAlbumPersistentID) as! NSNumber)"
                     albumTitle = song.value( forProperty: MPMediaItemPropertyAlbumTitle ) as! String
                     albumArtist = song.value( forProperty: MPMediaItemPropertyAlbumArtist ) as! String
@@ -216,6 +238,8 @@ class MediaLibraryManager: NSObject {
                     dateAdded = song.value(forProperty: MPMediaItemPropertyDateAdded) as! Date
                     artwork = song.artwork
                     albumGenre = song.value(forProperty: MPMediaItemPropertyGenre) as? String
+                    
+                    artistsDict[albumArtistID] = Artist(id: albumArtistID, name: albumArtist, artwork: artwork)
                     
                     if let yearNumber: NSNumber = song.value(forProperty: "year") as? NSNumber {
                         if (yearNumber.isKind(of: NSNumber.self)) {
@@ -226,7 +250,16 @@ class MediaLibraryManager: NSObject {
                         }
                     }
                     
+                    
                     songs.append( song )
+                    
+                    let songID = "\(song.persistentID)"
+                    let artistName = song.artist
+                    if let name = song.title {
+                        let newSong = Song(id: songID, name: name, artistName: artistName, artwork: artwork)
+                        tempSongs.append(newSong)
+                    }
+
                 }
                 
                 let albumInfo: AlbumInfo = AlbumInfo(
@@ -244,6 +277,22 @@ class MediaLibraryManager: NSObject {
                 albums.append( albumInfo )
             }
             albums.sort { $0 > $1}
+            
+            for album in albums {
+                if artistsDict[album.albumArtistID] != nil {
+                    artistsDict[album.albumArtistID]!.addAlbum(album)
+                }
+            }
+            
+            var tempArtistsSortedArray = [Artist]()
+            for (_ , artist) in artistsDict {
+                tempArtistsSortedArray.append(artist)
+            }
+            
+            self.allSongs = tempSongs
+            
+            self.artistsSorted = tempArtistsSortedArray.sorted(by: { $0.nameExcludingCommonPrefixes.localizedCaseInsensitiveCompare($1.nameExcludingCommonPrefixes) == .orderedAscending })
+            
             DispatchQueue.main.async {
                 completion(albums)
             }

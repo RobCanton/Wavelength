@@ -37,6 +37,9 @@ class SearchSongTableViewCell: UITableViewCell {
     
     func setItem(_ item:MPMediaItem) {
         artworkImageView.image = item.artwork?.image(at: artworkImageView.frame.size)
+        artworkImageView.backgroundColor = currentTheme.detailSecondary.color
+        artworkImageView.layer.borderColor = currentTheme.detailSecondary.color.cgColor
+        
         titleLabel.text = item.title
         artistLabel.text = item.artist
         albumLabel.text = item.albumTitle

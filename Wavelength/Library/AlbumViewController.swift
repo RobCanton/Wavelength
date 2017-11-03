@@ -46,7 +46,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         header.delegate = self
         
-        let nib = UINib(nibName: "SongTableViewCell", bundle: nil)
+        let nib = UINib(nibName: "AlbumSongTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
@@ -127,7 +127,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SongTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AlbumSongTableViewCell
         let song = album.songs[indexPath.row]
         
         cell.setup(title: song.title, number: song.albumTrackNumber)
@@ -167,7 +167,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     
                     if let currentIndex = currentlyPlayingIndex {
                         if i != currentIndex.row {
-                            if let cell = tableView.cellForRow(at: currentIndex) as? SongTableViewCell {
+                            if let cell = tableView.cellForRow(at: currentIndex) as? AlbumSongTableViewCell {
                                 cell.setMusicIndicatorState(.stopped)
                             }
                         }
@@ -180,7 +180,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         } else {
             if let currentIndex = currentlyPlayingIndex {
-                if let cell = tableView.cellForRow(at: currentIndex) as? SongTableViewCell {
+                if let cell = tableView.cellForRow(at: currentIndex) as? AlbumSongTableViewCell {
                     cell.setMusicIndicatorState(.stopped)
                 }
             }
@@ -189,7 +189,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func musicManagerDidUpdateState() {
         guard let currentIndex = currentlyPlayingIndex else { return }
-        if let cell = tableView.cellForRow(at: currentIndex) as? SongTableViewCell {
+        if let cell = tableView.cellForRow(at: currentIndex) as? AlbumSongTableViewCell {
             if musicPlayerManager.isPlaying {
                 cell.setMusicIndicatorState(.playing)
             } else {
@@ -230,11 +230,11 @@ extension AlbumViewController: AlbumHeaderProtocol {
     func showArtist() {
         guard let tab = tabBarController as? MainTabBarController else { return }
         let artistController = ArtistViewController()
-        print("artistCode: \(album.albumArtistID)")
-        artistController.artistID = album.albumArtist
-        artistController.appleMusicManager = tab.appleMusicManager
-        artistController.authorizationManager = tab.authorizationManager
-        navigationController?.pushViewController(artistController, animated: true)
+//        print("artistCode: \(album.albumArtistID)")
+//        artistController.artistID = album.albumArtist
+//        artistController.appleMusicManager = tab.appleMusicManager
+//        artistController.authorizationManager = tab.authorizationManager
+//        navigationController?.pushViewController(artistController, animated: true)
     }
 }
 

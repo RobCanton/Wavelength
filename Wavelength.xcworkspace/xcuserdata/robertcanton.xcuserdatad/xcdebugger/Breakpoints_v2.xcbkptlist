@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wavelength/TabBar/MusicPlayerBar.swift"
-            timestampString = "531110082.177095"
+            timestampString = "531351840.305928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "MusicPlayerBar"
             landmarkType = "3">
          </BreakpointContent>
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wavelength/Controllers/AppleMusicManager.swift"
-            timestampString = "531129783.918892"
+            timestampString = "531351840.306213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "performAppleMusicCatalogSearch(with:countryCode:completion:)"
             landmarkType = "7">
          </BreakpointContent>

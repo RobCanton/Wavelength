@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import MediaPlayer
+import AVFoundation
 
 class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
     
@@ -44,6 +45,10 @@ class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
     
     weak var delegate:WaveTableHeaderDelegate?
     
+    weak var appleMusicManager:AppleMusicManager?
+    weak var authorizationManager:AuthorizationManager?
+    
+    weak var mediaItem:MediaItem?
     func setupViews() {
         self.layoutIfNeeded()
         
@@ -94,9 +99,34 @@ class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
         progressBallContainer.isUserInteractionEnabled = true
         gesture.delegate = self
         
+        
+        volumeSlider.addTarget(self, action: #selector(didBeginSlidingVolume), for: .touchDown)
+        volumeSlider.addTarget(self, action: #selector(didEndSlidingVolume), for: [.touchUpInside,.touchUpOutside])
+        
         setTheme()
         
-        
+        observeVolume(true)
+    }
+    
+    func cleanup() {
+        observeVolume(false)
+    }
+    
+    func observeVolume(_ isObserving:Bool) {
+        if isObserving {
+            AVAudioSession.sharedInstance().addObserver(self, forKeyPath: "outputVolume", options: NSKeyValueObservingOptions.new, context: nil)
+        } else {
+            AVAudioSession.sharedInstance().removeObserver(self, forKeyPath: "outputVolume")
+
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "outputVolume" {
+            guard let dict = change, let temp = dict[NSKeyValueChangeKey.newKey] as? Float else { return }
+            let slider = volumeSlider as? UISlider
+            slider?.setValue(temp, animated: true)
+        }
     }
     
     func setTheme() {
@@ -132,11 +162,24 @@ class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
     }
     
     func setupMediaItem(_ item: MPMediaItem, isPlaying:Bool) {
-        
         if let image = item.artwork?.image(at: mediaImageView.frame.size) {
             mediaImageView.image = image
+        } else if let manager = appleMusicManager, let auth = authorizationManager {
+            mediaImageView.image = nil
+            manager.performSongRequest(songID: item.playbackStoreID, countryCode: auth.cloudServiceStorefrontCountryCode) { _item in
+                DispatchQueue.main.async {
+                    if let mediaItem = _item {
+                        let imageURL = mediaItem.artwork.imageURL(size: self.mediaImageView.frame.size)
+                        fetchMediaImageCheckingCache(url: imageURL) { url, image in
+                            if imageURL.absoluteString == url {
+                                self.mediaImageView.image = image
+                            }
+                        }
+                    }
+                }
+            }
         } else {
-            
+            mediaImageView.image = nil
         }
         
         mediaTitleLabel.text = item.title
@@ -172,7 +215,11 @@ class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    func setTrackPosition(trackDuration:TimeInterval, trackElapsed:TimeInterval) {
+    func setTrackPosition(trackDuration:TimeInterval, trackElapsed _trackElapsed:TimeInterval) {
+        var trackElapsed:TimeInterval = 0.0
+        if !_trackElapsed.isNaN {
+            trackElapsed = _trackElapsed
+        }
         let progress:CGFloat = CGFloat(trackElapsed) / CGFloat(trackDuration)
         
         if !isScrubbing {
@@ -320,6 +367,18 @@ class MusicPlayerView:UIView, UIGestureRecognizerDelegate {
         previousButton.animateTap()
         delegate?.previousTrack()
     }
+    
+    @IBAction func volumeChanged(_ sender: UISlider) {
+        (MPVolumeView().subviews.filter{NSStringFromClass($0.classForCoder) == "MPVolumeSlider"}.first as? UISlider)?.setValue(sender.value, animated: true)
+    }
+    
+    @objc func didBeginSlidingVolume() {
+        delegate?.volumeSliderChanged(true)
+    }
+    
+    @objc func didEndSlidingVolume() {
+        delegate?.volumeSliderChanged(false)
+    }
 }
 
 protocol WaveTableHeaderDelegate:class {
@@ -330,4 +389,5 @@ protocol WaveTableHeaderDelegate:class {
     func playTrack()
     func nextTrack()
     func previousTrack()
+    func volumeSliderChanged(_ isSliding:Bool)
 }

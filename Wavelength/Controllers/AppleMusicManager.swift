@@ -44,6 +44,46 @@ class AppleMusicManager {
     
     // MARK: General Apple Music API Methods
     
+    func performSongRequest(songID: String, countryCode:String, completion:@escaping((_ item:MediaItem?)->())) {
+        guard let developerToken = fetchDeveloperToken() else {
+            print("Developer Token not configured. See README for more details.")
+            return completion(nil)
+        }
+        
+        let urlRequest = AppleMusicRequestFactory.createSongRequest(id: songID, countryCode: countryCode, developerToken: developerToken)
+        print("Req: \(urlRequest)")
+        
+        let task = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+            guard error == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200 else {
+                //completion([], error)
+                print("Damn!: \(error?.localizedDescription)")
+                return completion(nil)
+            }
+            
+            do {
+                //print("DATA!: \(data)")
+                guard let jsonDictionary = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any],
+                    let data = jsonDictionary["data"] as? [[String:Any]], let first = data.first else {
+                    print("DAMN")
+                    return
+                }
+                //print("FIRST: \(first)")
+                let mediaItem = try MediaItem(json: first)
+                print(mediaItem)
+                do {
+                    let mediaItem = try MediaItem(json: first)
+                    return completion(mediaItem)
+                } catch {
+                    return completion(nil)
+                }
+                
+            } catch {
+                return completion(nil)
+            }
+        }
+        
+        task.resume()
+    }
     
     func performArtistSearchRequest(artistID: String, countryCode:String, completion: @escaping((_ success:Bool, _ albums:[String]?)->())) {
         guard let developerToken = fetchDeveloperToken() else {
@@ -261,6 +301,7 @@ class AppleMusicManager {
     }
     
     func processMediaItems(from json: [[String: Any]]) throws -> [MediaItem] {
+        print("PROCESSMEDIAITEMS: \(json)")
         let songMediaItems = try json.map { try MediaItem(json: $0) }
         return songMediaItems
     }

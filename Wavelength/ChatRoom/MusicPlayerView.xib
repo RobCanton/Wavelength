@@ -29,7 +29,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYw-iI-95P">
                             <rect key="frame" x="34" y="2.5" width="288" height="288"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joi" translatesAutoresizingMaskIntoConstraints="NO" id="mic-fr-krS">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mic-fr-krS">
                                     <rect key="frame" x="0.0" y="0.0" width="288" height="288"/>
                                 </imageView>
                             </subviews>
@@ -55,7 +55,7 @@
                     <rect key="frame" x="0.0" y="351" width="356" height="285"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ecG-F6-CNc">
-                            <rect key="frame" x="16" y="0.0" width="324" height="48"/>
+                            <rect key="frame" x="16" y="8" width="324" height="48"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMH-o5-k3v">
                                     <rect key="frame" x="18" y="8" width="288" height="18"/>
@@ -101,17 +101,17 @@
                                 <constraint firstItem="X9V-CN-Xrd" firstAttribute="leading" secondItem="ecG-F6-CNc" secondAttribute="leading" constant="18" id="tpe-dH-RFv"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UnFazed (feat. The Weeknd)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihT-d6-aqu">
-                            <rect key="frame" x="16" y="48" width="324" height="26.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihT-d6-aqu">
+                            <rect key="frame" x="16" y="56" width="324" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="NDR-CM-Us0">
-                            <rect key="frame" x="64" y="111" width="228" height="54"/>
+                            <rect key="frame" x="64" y="92.5" width="228" height="72.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bv-9K-M9i" customClass="MusicPlayerButton" customModule="Wavelength" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="72.5" height="72.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="7bv-9K-M9i" secondAttribute="height" multiplier="1:1" id="9Tw-EG-jJ8"/>
@@ -125,7 +125,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Hq-vL-YhR" customClass="MusicPlayerButton" customModule="Wavelength" customModuleProvider="target">
-                                    <rect key="frame" x="87.5" y="0.0" width="53.5" height="54"/>
+                                    <rect key="frame" x="78" y="0.0" width="72.5" height="72.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="6Hq-vL-YhR" secondAttribute="height" multiplier="1:1" id="FqM-ap-nH6"/>
@@ -139,7 +139,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rya-N1-ZNk" customClass="MusicPlayerButton" customModule="Wavelength" customModuleProvider="target">
-                                    <rect key="frame" x="174" y="0.0" width="54" height="54"/>
+                                    <rect key="frame" x="155.5" y="0.0" width="72.5" height="72.5"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="rya-N1-ZNk" secondAttribute="height" multiplier="1:1" id="nli-Yc-dVq"/>
@@ -165,6 +165,9 @@
                                             <real key="value" value="3"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="volumeChanged:" destination="-1" eventType="valueChanged" id="RT8-xg-TPQ"/>
+                                    </connections>
                                 </slider>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -212,12 +215,12 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yLQ-bm-3WC">
-                            <rect key="frame" x="16" y="75" width="324" height="24"/>
+                            <rect key="frame" x="16" y="56.5" width="324" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="24" id="q3R-ps-vQz"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Lil Uzi Vert - Luv is Rage 2">
+                            <state key="normal">
                                 <color key="titleColor" red="0.0" green="0.59709922439999996" blue="0.92242830990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -242,7 +245,7 @@
                         <constraint firstAttribute="trailing" secondItem="cNH-5C-VIj" secondAttribute="trailing" id="jFy-II-EcD"/>
                         <constraint firstAttribute="width" secondItem="TsC-7z-B9I" secondAttribute="height" multiplier="10:8" id="jv1-rO-iVL"/>
                         <constraint firstItem="ihT-d6-aqu" firstAttribute="top" secondItem="ecG-F6-CNc" secondAttribute="bottom" id="lIG-yF-Md9"/>
-                        <constraint firstItem="ecG-F6-CNc" firstAttribute="top" secondItem="TsC-7z-B9I" secondAttribute="top" id="n01-N7-CjY"/>
+                        <constraint firstItem="ecG-F6-CNc" firstAttribute="top" secondItem="TsC-7z-B9I" secondAttribute="top" constant="8" id="n01-N7-CjY"/>
                         <constraint firstItem="yLQ-bm-3WC" firstAttribute="leading" secondItem="TsC-7z-B9I" secondAttribute="leading" constant="16" id="rCx-vB-Djb"/>
                         <constraint firstItem="cNH-5C-VIj" firstAttribute="top" secondItem="NDR-CM-Us0" secondAttribute="bottom" id="xrm-R2-K5B"/>
                         <constraint firstItem="NDR-CM-Us0" firstAttribute="leading" secondItem="TsC-7z-B9I" secondAttribute="leading" constant="64" id="yHM-V8-chW"/>
@@ -331,7 +334,6 @@
         </view>
     </objects>
     <resources>
-        <image name="joi" width="642" height="642"/>
         <image name="next_large" width="40" height="40"/>
         <image name="play_large" width="48" height="48"/>
         <image name="prev_large" width="40" height="40"/>

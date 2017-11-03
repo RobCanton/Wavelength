@@ -98,6 +98,24 @@ struct AppleMusicRequestFactory {
         return urlRequest
     }
     
+    static func createSongRequest(id: String, countryCode: String, developerToken: String) -> URLRequest {
+        
+        // Create the URL components for the network call.
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = AppleMusicRequestFactory.appleMusicAPIBaseURLString
+        urlComponents.path = "/v1/catalog/\(countryCode)/songs/\(id)"
+        
+        // Create and configure the `URLRequest`.
+        
+        var urlRequest = URLRequest(url: urlComponents.url!)
+        urlRequest.httpMethod = "GET"
+        
+        urlRequest.addValue("Bearer \(developerToken)", forHTTPHeaderField: "Authorization")
+        
+        return urlRequest
+    }
+    
     static func createStorefrontsRequest(regionCode: String, developerToken: String) -> URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"

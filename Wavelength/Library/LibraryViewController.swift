@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class LibraryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class LibraryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     /// The instance of `AuthorizationManager` used for querying and requesting authorization status.
     var authorizationManager: AuthorizationManager!
@@ -30,7 +30,6 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
         navigationController?.navigationBar.shadowImage = UIImage()
         let settingsButton = UIBarButtonItem(image: UIImage(named: "settings"), style: .plain, target: self, action: #selector(openThemeSettings))
         navigationItem.rightBarButtonItem = settingsButton
@@ -48,8 +47,10 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         
         let nib = UINib(nibName: "SongCollectionViewCell", bundle: nil)
-        
         collectionView.register(nib, forCellWithReuseIdentifier: "songCell")
+        
+        let headerNib = UINib(nibName: "LibraryHeaderView", bundle: nil)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "headerView")
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
@@ -89,8 +90,25 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if loading { return 9 }
+        if loading { return 8 }
         return recentlyAddedAlbums.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerView", for: indexPath) as! LibraryHeaderView
+            header.setup()
+            header.delegate = self
+            return header
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: collectionView.bounds.width, height: 54.0 * 4 + 60.0)
+        }
+        return CGSize.zero
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -99,12 +117,12 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
             cell.setupAlbumItem(item: recentlyAddedAlbums[indexPath.row])
         }
         
+        cell.setTheme()
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //let item = mediaItems[indexPath.row]
-        //delegate?.playMedia(item: item)
         if loading { return }
         let controller = AlbumViewController()
         controller.musicPlayerManager = musicPlayerManager
@@ -121,6 +139,27 @@ class LibraryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
 }
 
+extension LibraryViewController: LibraryHeaderDelegate {
+    func showArtists() {
+        let controller = ArtistsViewController()
+        controller.appleMusicManager = appleMusicManager
+        controller.authorizationManager = authorizationManager
+        controller.mediaLibraryManager = mediaLibraryManager
+        controller.musicPlayerManager = musicPlayerManager
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func showSongs() {
+        let controller = SongsViewController()
+        controller.appleMusicManager = appleMusicManager
+        controller.authorizationManager = authorizationManager
+        controller.mediaLibraryManager = mediaLibraryManager
+        controller.musicPlayerManager = musicPlayerManager
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+
 extension LibraryViewController: ThemeDelegate {
     func didThemeUpdate() {
         let theme = ThemeManager.currentTheme
@@ -129,6 +168,8 @@ extension LibraryViewController: ThemeDelegate {
         navigationController?.navigationBar.barTintColor = theme.background.color
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.title.color]
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.title.color]
+        navigationController?.navigationBar.barStyle = themeBarStyle
+        
         collectionView.reloadData()
     }
 }

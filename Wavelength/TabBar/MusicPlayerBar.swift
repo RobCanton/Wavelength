@@ -17,6 +17,9 @@ protocol MusicPlayerBarProtocol:class {
 
 class MusicPlayerBar: UIView {
 
+    weak var appleMusicManager:AppleMusicManager?
+    weak var authorizationManager:AuthorizationManager?
+    
     @IBOutlet weak var mediaImageContainerView: UIView!
     @IBOutlet weak var mediaImageView: UIImageView!
     @IBOutlet weak var mediaTitleView: UILabel!
@@ -45,7 +48,26 @@ class MusicPlayerBar: UIView {
     
     func setupMediaItem( item: MPMediaItem) {
         
-        mediaImageView.image = item.artwork?.image(at: mediaImageView.frame.size)
+        if let image = item.artwork?.image(at: mediaImageView.frame.size) {
+            mediaImageView.image = image
+        } else if let manager = appleMusicManager, let auth = authorizationManager {
+            mediaImageView.image = nil
+            manager.performSongRequest(songID: item.playbackStoreID, countryCode: auth.cloudServiceStorefrontCountryCode) { _item in
+                DispatchQueue.main.async {
+                    if let mediaItem = _item {
+                        let imageURL = mediaItem.artwork.imageURL(size: self.mediaImageView.frame.size)
+                        fetchMediaImageCheckingCache(url: imageURL) { url, image in
+                            if imageURL.absoluteString == url {
+                                self.mediaImageView.image = image
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            mediaImageView.image = nil
+        }
+        
         mediaTitleView.text = item.title
     }
     

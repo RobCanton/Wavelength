@@ -10,12 +10,24 @@ import UIKit
 import Firebase
 import Alamofire
 import CoreData
+import AVFoundation
 
 let API_ENDPOINT = "https://us-central1-wavelength-app.cloudfunctions.net"
 
 let accentColor = UIColor(red: 0, green: 152/255, blue: 235/255, alpha: 1)
 let primaryColor = UIColor(red: 99/255, green: 219/255, blue: 254/255, alpha: 1)
 let secondaryColor = UIColor(red: 98/255, green: 139/255, blue: 220/255, alpha: 1)
+
+let imageCacheManager = ImageCacheManager()
+func fetchMediaImageCheckingCache(url:URL, completion:@escaping((_ imageURL:String, _ image:UIImage?)->())) {
+    if let image = imageCacheManager.cachedImage(url: url) {
+        return completion(url.absoluteString, image)
+    } else {
+        imageCacheManager.fetchImage(url: url) { image in
+            return completion(url.absoluteString, image)
+        }
+    }
+}
 
 func getHTTPSHeaders(_ completion:@escaping (_ headers:HTTPHeaders?)->()) {
     guard let user = Auth.auth().currentUser else { return completion(nil) }
@@ -40,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-
+        
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
         do {
@@ -75,7 +87,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-
+        didThemeUpdate()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didThemeUpdate), name: ThemeManager.didThemeUpdate, object: nil)
+        
+        do {
+            try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+        } catch {
+            print("error")
+        }
+        VolumeBar.sharedInstance.animationStyle = .fade
+        VolumeBar.sharedInstance.start()
         
         return true
     }
@@ -149,3 +173,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: ThemeDelegate {
+    @objc func didThemeUpdate() {
+        VolumeBar.sharedInstance.backgroundColor = currentTheme.background.color
+        VolumeBar.sharedInstance.tintColor = currentTheme.detailPrimary.color
+        VolumeBar.sharedInstance.trackTintColor = currentTheme.detailSecondary.color
+    }
+}

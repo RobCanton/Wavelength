@@ -19,6 +19,8 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     let cellIdentifier = "queueCell"
     var header:MusicPlayerView!
     
+    weak var appleMusicManager:AppleMusicManager?
+    weak var authorizationManager:AuthorizationManager?
     weak var musicPlayerManager:MusicPlayerManager?
     var mediaItem:MPMediaItem!
     var tableView:UITableView!
@@ -44,8 +46,11 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
         
         header = UINib(nibName: "MusicPlayerView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! MusicPlayerView
         header.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: headerHeight)
+        header.appleMusicManager = appleMusicManager
+        header.authorizationManager = authorizationManager
         header.setupViews()
         header.delegate = self
+    
         
         if let manager = musicPlayerManager {
             header.setupMediaItem(mediaItem, isPlaying: manager.isPlaying)
@@ -81,6 +86,10 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        VolumeBar.sharedInstance.backgroundColor = UIColor.black
+        VolumeBar.sharedInstance.tintColor = UIColor.white
+        VolumeBar.sharedInstance.trackTintColor = UIColor.gray
+        
         setNeedsStatusBarAppearanceUpdate()
         
         updateMusicTimeProgress()
@@ -103,8 +112,13 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        header.cleanup()
         timer?.invalidate()
         slowTimer?.invalidate()
+        
+        VolumeBar.sharedInstance.backgroundColor = currentTheme.background.color
+        VolumeBar.sharedInstance.tintColor = currentTheme.detailPrimary.color
+        VolumeBar.sharedInstance.trackTintColor = currentTheme.detailSecondary.color
     }
     
     @objc func updateMusicTimeProgress() {
@@ -228,6 +242,7 @@ class ChatRoomViewController: UIViewController, UITableViewDataSource, UITableVi
                 //self.queue = manager.queue
                 self.tableView.reloadData()
                 //print(self.mediaItem.lyrics)
+                
                 self.header.setupMediaItem(self.mediaItem, isPlaying: manager.isPlaying)
                 
                 if self.shouldScrollToTop {
@@ -291,6 +306,10 @@ extension ChatRoomViewController: WaveTableHeaderDelegate {
     
     func previousTrack() {
         musicPlayerManager?.skipBackToBeginningOrPreviousItem()
+    }
+    
+    func volumeSliderChanged(_ isSliding:Bool) {
+        deckTransitionDelegate?.isDismissEnabled = isSliding
     }
 }
 

@@ -52,7 +52,9 @@ class SongCollectionViewCell: UICollectionViewCell {
         
         titleLabel.text = item.albumTitle
         subtitleLabel.text = item.albumArtist
-        
+    }
+    
+    func setTheme() {
         // Theme
         let theme = ThemeManager.currentTheme
         self.titleLabel.textColor = theme.title.color

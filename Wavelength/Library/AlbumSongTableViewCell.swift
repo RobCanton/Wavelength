@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongTableViewCell: UITableViewCell {
+class AlbumSongTableViewCell: UITableViewCell {
     @IBOutlet weak var trackNumberLabel: UILabel!
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var trackIconView: UIView!

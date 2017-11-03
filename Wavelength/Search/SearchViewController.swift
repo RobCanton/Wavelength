@@ -78,10 +78,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewWillAppear(_ animated:Bool) {
         super.viewWillAppear(animated)
-        
+        didThemeUpdate()
         navigationController?.navigationBar.prefersLargeTitles = true
-        //navigationController?.navigationBar.barStyle = .default
-        navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.hidesSearchBarWhenScrolling = false
         
@@ -231,5 +229,44 @@ extension SearchViewController: UISearchResultsUpdating {
             tableView.reloadData()
         }
         
+    }
+}
+
+extension SearchViewController: ThemeDelegate {
+    func didThemeUpdate() {
+        let theme = ThemeManager.currentTheme
+        view.backgroundColor = theme.background.color
+        tableView.backgroundColor = theme.background.color
+        navigationController?.navigationBar.tintColor = theme.button.color
+        navigationController?.navigationBar.barTintColor = theme.background.color
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.title.color]
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: theme.title.color]
+        navigationController?.navigationBar.barStyle = themeBarStyle
+        searchController.searchBar.tintColor = theme.button.color
+        searchController.searchBar.textColor = theme.title.color
+        header.segmentedControl.tintColor = theme.button.color
+        header.backgroundColor = theme.background.color
+        tableView.reloadData()
+    }
+}
+
+extension UISearchBar {
+    
+    var textColor:UIColor? {
+        get {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                return textField.textColor
+            } else {
+                return nil
+            }
+        }
+        
+        set (newValue) {
+            if let textField = self.value(forKey: "searchField") as?
+                UITextField  {
+                textField.textColor = newValue
+            }
+        }
     }
 }
